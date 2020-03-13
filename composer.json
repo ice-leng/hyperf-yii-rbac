@@ -6,6 +6,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.2.0",
+    "lengbin/yii-rbac": "dev-master",
     "lengbin/hyperf-yii-db": "dev-master"
   },
   "minimum-stability": "stable",
