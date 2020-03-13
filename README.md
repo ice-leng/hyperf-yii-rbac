@@ -47,6 +47,6 @@ Publish
 -------
 ```php
       
-php ./bin/hyperf.php vendor:publish lengbin/hyperf-rbac
+php ./bin/hyperf.php vendor:publish lengbin/hyperf-yii-rbac
 
 ```
