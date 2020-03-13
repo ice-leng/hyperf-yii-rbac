@@ -35,7 +35,7 @@ class RbacFactory
             $itemChild = ArrayHelper::getValue($config, 'itemChild');
             $connection = ArrayHelper::getValue($config, 'connection', Connection::class);
             $db = new $connection($container);
-            $logger = $container->get(LoggerFactory::class)->get($logKey);
+            $logger = $container->get(LoggerFactory::class)->get('Rbac', $logKey);
             $class = new $driver($ruleFactory, $db, $cache, $logger, $item, $itemChild, $assignment, $rule);
         }
 
