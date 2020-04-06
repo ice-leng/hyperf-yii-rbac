@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Lengbin\Hyperf\YiiDb\Rbac;
 
-
+use Lengbin\Auth\User\AccessCheckerInterface;
 use Lengbin\YiiDb\Rbac\ManagerInterface;
 
 class ConfigProvider
@@ -21,13 +21,14 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
-                ManagerInterface::class => RbacFactory::class
+                ManagerInterface::class       => RbacFactory::class,
+                AccessCheckerInterface::class => RbacFactory::class,
             ],
-            'publish' => [
+            'publish'      => [
                 [
-                    'id' => 'rbac',
+                    'id'          => 'rbac',
                     'description' => 'The config for rabc.',
-                    'source' => __DIR__ . '/../publish/rbac.php',
+                    'source'      => __DIR__ . '/../publish/rbac.php',
                     'destination' => BASE_PATH . '/config/autoload/rbac.php',
                 ],
             ],
