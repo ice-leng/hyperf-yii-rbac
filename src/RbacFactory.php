@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Lengbin\Hyperf\YiiDb\Rbac;
+namespace Lengbin\Hyperf\YiiSoft\Rbac;
 
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Logger\LoggerFactory;
 use Lengbin\Helper\YiiSoft\Arrays\ArrayHelper;
-use Lengbin\Hyperf\YiiDb\Connection;
-use Lengbin\YiiDb\Rbac\Exceptions\InvalidArgumentException;
-use Lengbin\YiiDb\Rbac\Manager\DbManager;
-use Lengbin\YiiDb\Rbac\Manager\PhpManager;
-use Lengbin\YiiDb\Rbac\Manager\PhpManagerFile;
-use Lengbin\YiiDb\Rbac\RuleFactory\ClassNameRuleFactory;
+use Lengbin\YiiSoft\Rbac\Exceptions\InvalidArgumentException;
+use Lengbin\YiiSoft\Rbac\Manager\DbManager;
+use Lengbin\YiiSoft\Rbac\Manager\PhpManager;
+use Lengbin\YiiSoft\Rbac\Manager\PhpManagerFile;
+use Lengbin\YiiSoft\Rbac\RuleFactory\ClassNameRuleFactory;
 use Psr\Container\ContainerInterface;
 use Psr\SimpleCache\CacheInterface;
 
@@ -26,26 +25,27 @@ class RbacFactory
 
         $ruleFactory = new ClassNameRuleFactory();
         $cache = ArrayHelper::getValue($config, 'cache', $container->get(CacheInterface::class));
-        $item = ArrayHelper::getValue($config, 'item');;
-        $assignment = ArrayHelper::getValue($config, 'assignment');;
+        $item = ArrayHelper::getValue($config, 'item');
+        $assignment = ArrayHelper::getValue($config, 'assignment');
         $rule = ArrayHelper::getValue($config, 'rule');
+        $menu = ArrayHelper::getValue($config, 'menu');
+        $logKey = ArrayHelper::getValue($config, 'log', 'default');
+        $logger = $container->get(LoggerFactory::class)->get('Rbac', $logKey);
 
         if ($driver === DbManager::class) {
-            $logKey = ArrayHelper::getValue($config, 'log', 'default');
             $itemChild = ArrayHelper::getValue($config, 'itemChild');
             $connection = ArrayHelper::getValue($config, 'connection', Connection::class);
             $db = new $connection($container);
-            $logger = $container->get(LoggerFactory::class)->get('Rbac', $logKey);
-            $class = new $driver($ruleFactory, $db, $cache, $logger, $item, $itemChild, $assignment, $rule);
+            $class = new $driver($ruleFactory, $db, $cache, $logger, $item, $itemChild, $assignment, $rule, $menu);
         }
 
         if ($driver === PhpManager::class) {
-            $class = new $driver($ruleFactory, $cache, $item, $assignment, $rule);
+            $class = new $driver($ruleFactory, $cache, $logger, $item, $assignment, $rule, $menu);
         }
 
         if ($driver === PhpManagerFile::class) {
             $directory = ArrayHelper::getValue($config, 'directory');
-            $class = new $driver($ruleFactory, $directory, $item, $assignment, $rule);
+            $class = new $driver($ruleFactory, $directory, $logger, $item, $assignment, $rule, $menu);
         }
 
         if ($class === null) {

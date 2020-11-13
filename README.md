@@ -27,7 +27,7 @@ or add
 to the require section of your `composer.json` file.
 
 
-Request [详情](https://github.com/ice-leng/rabc-permissions)
+Request [详情](https://github.com/ice-leng/rabc)
 -------
 ```
 "lengbin/jwt": "dev-master"

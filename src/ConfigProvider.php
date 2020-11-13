@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Lengbin\Hyperf\YiiDb\Rbac;
+namespace Lengbin\Hyperf\YiiSoft\Rbac;
 
 use Lengbin\Auth\User\AccessCheckerInterface;
-use Lengbin\YiiDb\Rbac\ManagerInterface;
+use Lengbin\YiiSoft\Rbac\ManagerInterface;
 
 class ConfigProvider
 {
