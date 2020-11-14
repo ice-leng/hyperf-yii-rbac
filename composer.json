@@ -25,7 +25,7 @@
   ],
   "extra": {
     "hyperf": {
-      "config": "Lengbin\\Hyperf\\YiiDb\\Rbac\\ConfigProvider"
+      "config": "Lengbin\\Hyperf\\YiiSoft\\Rbac\\ConfigProvider"
     }
   }
 }

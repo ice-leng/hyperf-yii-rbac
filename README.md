@@ -38,7 +38,7 @@ Configs
 ``` php
     /config/autoload/rbac.php
     return [
-        'driver'       => \Lengbin\YiiDb\Rbac\Manager\DbManager::class,
+        'driver'       => \Lengbin\YiiSoft\Rbac\Manager\DbManager::class,
     ];
 ```
 
