@@ -10,7 +10,7 @@ class Connection implements ConnectionInterface
 
     public function selectOne(string $query, array $bindings = [])
     {
-        return Db::selectOne($query, $bindings);
+        return (array)Db::selectOne($query, $bindings);
     }
 
     public function select(string $query, array $bindings = []): array
