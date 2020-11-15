@@ -39,6 +39,9 @@
  *      'menu'         => null, // menu 表名称,可以不需要
  * ];
  */
+
+use Lengbin\YiiSoft\Rbac\Manager\DbManager;
+
 return [
-    'driver' => \Lengbin\YiiSoft\Rbac\Manager\DbManager::class,
+    'driver' => DbManager::class,
 ];
